@@ -8,7 +8,12 @@
 import Foundation
 
 public struct OneOffPaymentResponse: Decodable {
+
     public let moneybox: Double?
+    
+    public init(moneybox: Double) {
+        self.moneybox = moneybox
+    }
     
     enum CodingKeys: String, CodingKey {
         case moneybox = "Moneybox"

@@ -1,70 +1,25 @@
+# MoneyBox Tech Test
 
-# Moneybox iOS Technical Challenge
+Hey thanks for taking a look at my coding test. It's not perfect and there's a lot i'd change but i'd love explain what i've done. 
 
-## The Brief
 
-To create a 'light' version of the Moneybox app that will allow existing users to login and check their account balance, as well as viewing their Moneybox savings. 
-- To fork this repository to your private repository and implement the solution.
- 
-### The app should have
-- A login screen to allow existing users to sign in
-- A screen to show the accounts the user holds, e.g. ISA, GIA
-- A screen to show some details of the account, including a simple button to add money to its moneybox.
-- The button will add a fixed amount of £10. It should use the `POST /oneoffpayments` endpoint provided, and the account's Moneybox amount would be updated.
+# Outline
 
-A prototype wireframe of all 3 screens is provided as a guideline. You are free to provide additional information if you wish.
-![](wireframe.png)
+I'm a big fan of MVP and I thought this project would be perfect for it. Each screen is fairly simple. Could be built with reusable components and it should be fairly scalable. I used the coordinator pattern to handle moving between screens. 
 
-### What we are looking for
- - **Showcase what you can do. It can be a refined UI, or enhanced UX, or use of specific design patterns in the code, or anything that can make the project stand out.**
- - Demonstration of coding style, conventions and patterns.
- - A tidy code organisation.
- - Use of autolayout and UIKit.
- - Implementation of unit tests.
- - Any accessibility feature would be a bonus.
- - The application must run on iOS 15 or later.
- - Any 3rd party library should be integrated using Swift Package Manager.
+## What I would add if I had more time  
 
-### API Usage
-The Networking methods and Models for requests and responses are ready-made in the Networking module of the project.
+* Localizable strings file that my Strings.Swift class would point to. We do something similar in my current role. 
+* Use a Currency Amount model over the double values you decode to
+* An improved networking library over what was provided, Alamofire or something. I felt the current testing framework was challenging to fully test the app.
+* I'd have used a Singleton for my APISessions object over passing around the one instance, i know I made a mistake there.
+* More extensive use of extensions
 
-#### Base URL & Test User
-The base URL for the moneybox sandbox environment is `https://api-test02.moneyboxapp.com/`. </br>
-You can log in using the following user:
+### Known Issues
 
-|  Username          | Password         |
-| ------------- | ------------- |
-| test+ios2@moneyboxapp.com  | P455word12  |
+* I am aware that because I have a loading screen that loads in the product details the balance will not be immediately updated when the user enters the app. This was an architectural decision based on my presumption that the balance wasn't updated immediately. We do a similar thing here at SB, it was possibly a mistake but oh well.
 
-#### Authentication
-You should obtain a bearer token from the Login response, and attach it as an Authorization header for the endpoints. Helper methods in the API/Base folder should be used for that.
-(Note: The BearerToken has a sliding expiration of 5 mins).
+## Questions I have
 
-| Key  |  Value  |
-| ------------- | ------------- |
-| Authorization |  Bearer TsMWRkbrcu3NGrpf84gi2+pg0iOMVymyKklmkY0oI84= |
+* I couldn't fully test my solution because the API was returning "Your annual lifetime limit is £4000,  you can add £x". This was returned on both accounts? Hopefully this wasn't a me thing. I've done my best to work around this though through unit testing. 
 
-#### API Call Hint
-
-```
-let dataProvider = DataProvider()
-dataProvider.login(request: request, completion: completion)
-```
-request: Initialize your request model </br>
-Completion: Handle your API success and failure cases
-
-## Unit Tests
-The MoneyBoxTests folder includes stubbed data to easily mock the responses needed for unit testing
-
-#### Usage Hint
-You can create a DataProviderMock class via inject DataProviderLogic protocol </br>
-You can mock response in Login.json file like this:
-```
-StubData.read(file: "Login", callback: completion)
-```
-
-### How to Submit your solution:
- - To share your Github repository with the user valerio-bettini.
- - (Optional) Provide a readme in markdown which outlines your solution.
-
-## Good luck!

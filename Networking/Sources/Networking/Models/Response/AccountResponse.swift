@@ -9,13 +9,30 @@ import Foundation
 
 // MARK: - AccountResponse
 public struct AccountResponse: Codable {
+    
     public let moneyboxEndOfTaxYear: String?
-    public let totalPlanValue: Double?
+    public let totalPlanValue: Double
     public let totalEarnings: Double?
     public let totalContributionsNet: Double?
     public let totalEarningsAsPercentage: Double?
     public let productResponses: [ProductResponse]?
     public let accounts: [Account]?
+    
+    public init(moneyboxEndOfTaxYear: String?,
+                totalPlanValue: Double,
+                totalEarnings: Double?,
+                totalContributionsNet: Double?,
+                totalEarningsAsPercentage: Double?,
+                productResponses: [ProductResponse]?,
+                accounts: [Account]?) {
+        self.moneyboxEndOfTaxYear = moneyboxEndOfTaxYear
+        self.totalPlanValue = totalPlanValue
+        self.totalEarnings = totalEarnings
+        self.totalContributionsNet = totalContributionsNet
+        self.totalEarningsAsPercentage = totalEarningsAsPercentage
+        self.productResponses = productResponses
+        self.accounts = accounts
+    }
 
     enum CodingKeys: String, CodingKey {
         case moneyboxEndOfTaxYear = "MoneyboxEndOfTaxYear"
@@ -36,6 +53,15 @@ public struct Account: Codable {
     public let wrapper: Wrapper?
     public let milestone: Milestone?
     public let hasCollections: Bool?
+    
+    public init(type: String?, name: String?, deepLinkIdentifier: String?, wrapper: Wrapper?, milestone: Milestone?, hasCollections: Bool?) {
+        self.type = type
+        self.name = name
+        self.deepLinkIdentifier = deepLinkIdentifier
+        self.wrapper = wrapper
+        self.milestone = milestone
+        self.hasCollections = hasCollections
+    }
 
     enum CodingKeys: String, CodingKey {
         case type = "Type"
@@ -117,6 +143,30 @@ public struct ProductResponse: Codable {
     public let isSwitchVisible: Bool?
     public let state: String?
     public let dateCreated: String?
+    
+    public init(id: Int?, assetBoxGlobalID: String?, planValue: Double?, moneybox: Double?, subscriptionAmount: Int?, totalFees: Double?, isSelected: Bool?, isFavourite: Bool?, collectionDayMessage: String?, wrapperID: String?, isCashBox: Bool?, pendingInstantBankTransferAmount: Int?, assetBox: AssetBox?, product: Product?, investorAccount: InvestorAccount?, personalisation: Personalisation?, contributions: Contributions?, moneyboxCircle: MoneyboxCircle?, isSwitchVisible: Bool?, state: String?, dateCreated: String?) {
+        self.id = id
+        self.assetBoxGlobalID = assetBoxGlobalID
+        self.planValue = planValue
+        self.moneybox = moneybox
+        self.subscriptionAmount = subscriptionAmount
+        self.totalFees = totalFees
+        self.isSelected = isSelected
+        self.isFavourite = isFavourite
+        self.collectionDayMessage = collectionDayMessage
+        self.wrapperID = wrapperID
+        self.isCashBox = isCashBox
+        self.pendingInstantBankTransferAmount = pendingInstantBankTransferAmount
+        self.assetBox = assetBox
+        self.product = product
+        self.investorAccount = investorAccount
+        self.personalisation = personalisation
+        self.contributions = contributions
+        self.moneyboxCircle = moneyboxCircle
+        self.isSwitchVisible = isSwitchVisible
+        self.state = state
+        self.dateCreated = dateCreated
+    }
 
     enum CodingKeys: String, CodingKey {
         case id = "Id"
@@ -240,6 +290,29 @@ public struct Product: Codable {
     public let interestRateAmount: Double?
     public let logoURL: String?
     public let fund: Fund?
+    
+    public init(id: Int?, name: String?, categoryType: String?, type: String?, friendlyName: String?, canWithdraw: Bool?, productHexCode: String?, annualLimit: Int?, depositLimit: Int?, bonusMultiplier: Double?, minimumWeeklyDeposit: Int?, maximumWeeklyDeposit: Int?, documents: Documents?, state: String?, wrapperDefinitionGlobalID: String?, lisa: Lisa?, interestRate: String?, interestRateAmount: Double?, logoURL: String?, fund: Fund?) {
+        self.id = id
+        self.name = name
+        self.categoryType = categoryType
+        self.type = type
+        self.friendlyName = friendlyName
+        self.canWithdraw = canWithdraw
+        self.productHexCode = productHexCode
+        self.annualLimit = annualLimit
+        self.depositLimit = depositLimit
+        self.bonusMultiplier = bonusMultiplier
+        self.minimumWeeklyDeposit = minimumWeeklyDeposit
+        self.maximumWeeklyDeposit = maximumWeeklyDeposit
+        self.documents = documents
+        self.state = state
+        self.wrapperDefinitionGlobalID = wrapperDefinitionGlobalID
+        self.lisa = lisa
+        self.interestRate = interestRate
+        self.interestRateAmount = interestRateAmount
+        self.logoURL = logoURL
+        self.fund = fund
+    }
 
     enum CodingKeys: String, CodingKey {
         case id = "Id"
@@ -280,6 +353,13 @@ public struct Fund: Codable {
     public let name: String?
     public let logoURL: String?
     public let isFundDMB: Bool?
+    
+    public init(fundId: Int?, name: String?, logoURL: String?, isFundDMB: Bool?) {
+        self.fundID = fundId
+        self.name = name
+        self.logoURL = logoURL
+        self.isFundDMB = isFundDMB
+    }
 
     enum CodingKeys: String, CodingKey {
         case fundID = "FundId"
